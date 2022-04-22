@@ -1,4 +1,3 @@
-+-------------------+
-|    Black-Cube     |
-+-------------------+
+# Black-Cube
 
+![](.:GetRelativeOrigin:.BlackCube.jpeg "")
