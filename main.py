@@ -3,8 +3,8 @@ from datetime import datetime, timedelta
 import json
 
 url = 'https://api.binance.com/api/v3/klines'
-symbol = 'BTCEUR'
-interval = 'id'
+symbol = 'AVAXUSDT'
+interval = '1d'
 my_date = datetime.now() - timedelta(30)
 
 date_start = int(my_date.timestamp()*1000)
