@@ -1,6 +1,7 @@
 import requests
 from datetime import datetime, timedelta
 import json
+import pandas as pd
 
 url = 'https://api.binance.com/api/v3/klines'
 symbol = 'AVAXUSDT'
@@ -14,4 +15,7 @@ parameters = { 'symbol' : symbol, 'interval' : interval, 'startTime' : date_star
 
 res = json.loads(requests.get(url, parameters).text)
 
-print (res)
+data = pd.DataFrame(res)
+data.columns = ['datetime', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_traders', 'taker_base_vol','taker_quote_vol', 'ignore']
+
+print (data)
