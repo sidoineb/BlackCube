@@ -11,7 +11,7 @@ Black-Cube est un projet de bot pour l'évaluation et le trading du marché des 
 
 ## .: LICENSE :.
 
-Le programme Black-Cube est un projet sous license libre GNU GPL (https://www.gnu.org).
+Le programme Black-Cube est sous license libre GNU GPL (https://www.gnu.org).
 
 
 ## .: UTILISATION :.
