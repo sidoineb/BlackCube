@@ -26,6 +26,14 @@ data['SMA20'] = ta.trend.sma_indicator(data['close'], 20)
 last_sma9 = data['SMA9'].iloc[-1]
 last_sma20 = data['SMA20'].iloc[-1]
 
+print("#################################")
+print("##       -  BlackCube -        ##")
+print("##         bot trading         ##")
+print("#################################")
+print("")
+print(".: Derniere valeur de SMA9 :.")
 print(last_sma9)
+print("")
+print(".: Derniere valeur de SMA20 :.")
 print(last_sma20)
 # print (data)
