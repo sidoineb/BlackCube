@@ -1,8 +1,22 @@
 import requests
 from datetime import datetime, timedelta
+from tkinter import *
 import json
 import pandas as pd
 import ta
+
+# Fenetre principale
+window = Tk()
+
+# personalisation
+window.title(".: Black Cube :.")
+window.geometry("600*600")
+window.minsize(480, 360)
+window.iconbitmap("BlackCube.ico")
+window.config(background='')
+
+# Afficher
+window.mainloop()
 
 
 url = 'https://api.binance.com/api/v3/klines'
