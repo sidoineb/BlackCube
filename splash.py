@@ -5,6 +5,7 @@ from tkinter import *
 splash_root = Tk()
 splash_root.title('SplashScreen')
 splash_root.geometry("300x200+-1500+250")
+
 # Cacher le titre splash
 splash_root.overrideredirect(True)
 

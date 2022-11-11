@@ -10,15 +10,25 @@ window = Tk()
 
 # personalisation
 window.title(".: Black Cube :.")
-window.geometry("600*600")
+window.geometry("600x600")
 window.minsize(480, 360)
-window.iconbitmap("BlackCube.ico")
-window.config(background='')
+window.iconbitmap('BlackCube.ico')
+window.config(background='b1f5b1')
+
+# Barre de menu
+menu_bar = Menu(window)
+file_menu = Menu(menu_bar, tearoff=0)
+file_menu.add_command(Label="test")
+file_menu.add_command(label="Quitter", command=window.quit)
+menu_bar.add_cascade(label="Fichier", command=file_menu)
+
+# Config fenetre pour menu bar
+window.config(menu=menu_bar)
 
 # Afficher
 window.mainloop()
 
-
+# Moteur
 url = 'https://api.binance.com/api/v3/klines'
 symbol = 'BTCUSDT'
 interval = '1d'
