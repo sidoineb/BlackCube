@@ -18,7 +18,7 @@ def main_window():
 
     root = Tk()
     root.title('BlackCube - SplashScreen')
-    root.iconbitmap('')
+    root.iconbitmap('BlackCube.xbm')
     root.geometry("500x500")
 
     main_label = label(root, text="MainScreen")
