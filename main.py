@@ -12,7 +12,6 @@ window = Tk()
 window.title(".: Black Cube :.")
 window.geometry("600x600")
 window.minsize(480, 360)
-window.wm_iconbitmap("BlackCube.xbm")
 window.config(background='#b1f5b1')
 
 # Barre de menu
