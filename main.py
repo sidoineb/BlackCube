@@ -1,3 +1,5 @@
+import tkinter
+
 import requests
 from datetime import datetime, timedelta
 from tkinter import *
@@ -15,17 +17,23 @@ window.minsize(480, 360)
 window.config(background='#b1f5b1')
 
 # Barre de menu
-menu_bar = Menu(window)
-file_menu = Menu(menu_bar, tearoff=0)
-file_menu.add_command(label="test")
-file_menu.add_command(label="Quitter", command=window.quit)
-menu_bar.add_cascade(label="Fichier", command=file_menu)
+mainmenu = tkinter.Menu(window)
 
+menu_1 = tkinter.Menu(mainmenu, tearoff=0)
+menu_1.add_command(label="Option1")
+menu_1.add_command(label="Option2")
+menu_1.add_command(label="Quitter", command=window.quit)
 
-# Config fenetre pour menu bar
-window.config(menu=menu_bar)
+menu_2 = tkinter.Menu(mainmenu, tearoff=0)
+menu_2.add_command(label="Option1")
+menu_2.add_command(label="Option2")
+menu_2.add_command(label="Option3")
+
+mainmenu.add_cascade(label="Fichier", menu=menu_1)
+mainmenu.add_cascade(label="Cryptos", menu=menu_2)
 
 # Afficher
+window.config(menu=mainmenu)
 window.mainloop()
 
 # Moteur
