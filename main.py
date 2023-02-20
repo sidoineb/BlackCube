@@ -1,6 +1,13 @@
-import tkinter
+#################################
+##       -  BlackCube -        ##
+##         bot trading         ##
+#################################
 
+
+import tkinter
 import requests
+import matplotlib.pyplot as plt
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from datetime import datetime, timedelta
 from tkinter import *
 import json
@@ -25,16 +32,35 @@ menu_1.add_command(label="Option2")
 menu_1.add_command(label="Quitter", command=window.quit)
 
 menu_2 = tkinter.Menu(mainmenu, tearoff=0)
-menu_2.add_command(label="Option1")
-menu_2.add_command(label="Option2")
-menu_2.add_command(label="Option3")
+menu_2.add_command(label="Bitcoin")
+menu_2.add_command(label="Etherium")
+menu_2.add_command(label="Avalanche")
+menu_2.add_command(label="Avalanche")
+
+menu_3 = tkinter.Menu(mainmenu, tearoff=0)
+menu_3.add_command(label="Or")
+menu_3.add_command(label="Argent")
+menu_3.add_command(label="Cuivre")
 
 mainmenu.add_cascade(label="Fichier", menu=menu_1)
 mainmenu.add_cascade(label="Cryptos", menu=menu_2)
+mainmenu.add_cascade(label="Métaux", menu=menu_3)
 
-# Afficher
-window.config(menu=mainmenu)
-window.mainloop()
+# Créer une figure matplotlib
+fig, ax = plt.subplots()
+
+# Dessiner une ligne
+x = [1, 2, 3, 4, 5]
+y = [10, 8, 6, 4, 2]
+ax.plot(x, y)
+
+# Créer un canvas tkinter
+root = Tk()
+frame = Frame(root)
+canvas = FigureCanvasTkAgg(fig, master=frame)
+canvas.draw()
+canvas.get_tk_widget().pack(side='top', fill='both', expand=1)
+frame.pack()
 
 # Moteur
 url = 'https://api.binance.com/api/v3/klines'
@@ -58,14 +84,13 @@ data['SMA20'] = ta.trend.sma_indicator(data['close'], 20)
 last_sma9 = data['SMA9'].iloc[-1]
 last_sma20 = data['SMA20'].iloc[-1]
 
-print("#################################")
-print("##       -  BlackCube -        ##")
-print("##         bot trading         ##")
-print("#################################")
-print("")
-print(".: Derniere valeur de SMA9 :.")
-print(last_sma9)
-print("")
-print(".: Derniere valeur de SMA20 :.")
-print(last_sma20)
+# Afficher
+window.config(menu=mainmenu)
+window.mainloop()
+
+#print(".: Derniere valeur de SMA9 :.")
+#print(last_sma9)
+#print("")
+#print(".: Derniere valeur de SMA20 :.")
+#print(last_sma20)
 # print (data)
