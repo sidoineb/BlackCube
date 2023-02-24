@@ -1,5 +1,3 @@
-from cProfile import label
-from logging import root
 from tkinter import *
 
 splash_root = Tk()
@@ -7,9 +5,9 @@ splash_root.title('SplashScreen')
 splash_root.geometry("300x200+-1500+250")
 
 # Cacher le titre splash
-splash_root.overrideredirect(True)
+splash_root.withdraw()
 
-splash_label = label(splash_root, text="SplashScreen")
+splash_label = Label(splash_root, text="SplashScreen")
 splash_label.pack(pady=20)
 
 
@@ -21,14 +19,13 @@ def main_window():
     root.iconbitmap('BlackCube.xbm')
     root.geometry("500x500")
 
-    main_label = label(root, text="MainScreen")
+    main_label = Label(root, text="MainScreen")
     main_label.pack(pady=20)
+
+    root.mainloop()
 
 
 # SplashScreen Timer
 splash_root.after(3000, main_window)
 
-
-
-
-root.mainloop()
+splash_root.mainloop()

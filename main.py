@@ -1,26 +1,29 @@
-#################################
-##       -  BlackCube -        ##
-##         bot trading         ##
-#################################
-
 import tkinter
 import requests
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from datetime import datetime, timedelta
-from tkinter import *
 import json
 import pandas as pd
 import ta
 
 # Fenetre principale
-window = Tk()
+window = tkinter.Tk()
 
 # personalisation
 window.title(".: Black Cube :.")
 window.geometry("600x600")
 window.minsize(480, 360)
 window.config(background='#b1f5b1')
+
+# Splash screen
+splash = tkinter.Toplevel()
+splash.title("Chargement en cours...")
+splash.geometry("300x100")
+label = tkinter.Label(splash, text="Chargement en cours...", font=("Helvetica", 16))
+label.pack(pady=20)
+splash.destroy()
+splash.after(30000, splash.destroy)
 
 # Barre de menu
 mainmenu = tkinter.Menu(window)
@@ -47,8 +50,6 @@ mainmenu.add_cascade(label="Métaux", menu=menu_3)
 
 # Afficher la fenêtre
 window.config(menu=mainmenu)
-window.mainloop()
-
 
 def plot_graph(symbol):
     # Moteur
@@ -59,12 +60,9 @@ def plot_graph(symbol):
     date_start = int(my_date.timestamp()*1000)
     date_end = int(datetime.now().timestamp()*1000)
 
-    parameters = { 'symbol' : symbol, 'interval' : interval, 'startTime' : date_start, 'endTime' : date_end }
-
-    res = json.loads(requests.get(url, parameters).text)
+    res = json.loads(requests.get(url).text)
 
     data = pd.DataFrame(res)
-    data.columns = ['datetime', 'open', 'high', 'low', 'close', 'volume', 'close_time', 'qav', 'num_traders', 'taker_base_vol','taker_quote_vol', 'ignore']
 
     data['SMA9'] = ta.trend.sma_indicator(data['close'], 9)
     data['SMA20'] = ta.trend.sma_indicator(data['close'], 20)
@@ -76,17 +74,23 @@ def plot_graph(symbol):
     data_to_plot = data.tail(50)
 
     # Tracer le graphe avec Matplotlib
-    fig, ax = plt.subplots()
-    ax.plot(data_to_plot['datetime'], data_to_plot['close'], label='Close')
-    ax.plot(data_to_plot['datetime'], data_to_plot['SMA9'], label='SMA9')
-    ax.plot(data_to_plot['datetime'], data_to_plot['SMA20'], label='SMA20')
-    ax.legend()
-    ax.set_xlabel('Date')
-    ax.set_ylabel('Price')
-    ax.set_title(f'Graphique de {symbol}')
+    fig, ax = plt.subplots(figsize=(10, 7))
 
-    # Afficher le graphe dans la fenêtre Tkinter
-    canvas = FigureCanvasTkAgg(fig, master=window)
-    canvas.draw()
-    canvas.get_tk_widget().pack()
+    # Plot the candlestick chart
+    candlestick_ohlc(ax, data_to_plot.values, width=0.0005, colorup='green', colordown='red', alpha=0.8)
+    ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d %H:%M'))
 
+    # Plot the moving averages
+    ax.plot(data_to_plot['datetime'], data_to_plot['SMA9'], label='SMA9', linewidth=1, color='blue')
+    ax.plot(data_to_plot['datetime'], data_to_plot['SMA20'], label='SMA20', linewidth=1, color='orange')
+    ax.plot(data_to_plot['datetime'], data_to_plot['SMA50'], label='SMA50', linewidth=1, color='purple')
+
+    # Add the legend and title
+    ax.legend(loc='upper left')
+    ax.set_title('BTC/USDT - Last 1000 Candles')
+
+    # Add the grid
+    ax.grid(True)
+
+    # Show the plot
+    plt.show()
