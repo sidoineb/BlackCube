@@ -6,6 +6,8 @@ from datetime import datetime, timedelta
 import json
 import pandas as pd
 import ta
+from mplfinance.original_flavor import candlestick_ohlc
+import matplotlib.dates as mdates
 
 # Fenetre principale
 window = tkinter.Tk()
@@ -23,7 +25,7 @@ splash.geometry("300x100")
 label = tkinter.Label(splash, text="Chargement en cours...", font=("Helvetica", 16))
 label.pack(pady=20)
 splash.destroy()
-splash.after(30000, splash.destroy)
+splash.after(3000, splash.destroy)
 
 # Barre de menu
 mainmenu = tkinter.Menu(window)
@@ -92,5 +94,9 @@ def plot_graph(symbol):
     # Add the grid
     ax.grid(True)
 
-    # Show the plot
-    plt.show()
+    # Convertir le graphe Matplotlib en objet Tkinter
+    canvas = FigureCanvasTkAgg(fig, master=window)
+    canvas.draw()
+
+    # Afficher le graphe dans la fenêtre principale
+    canvas.get_tk_widget().pack(side=tkinter.TOP, fill=tkinter.BOTH, expand=1)
