@@ -12,7 +12,7 @@ import matplotlib.dates as mdates
 # Fenetre principale
 window = tkinter.Tk()
 
-# personalisation
+# Personalisation
 window.title(".: Black Cube :.")
 window.geometry("600x600")
 window.minsize(480, 360)
@@ -87,11 +87,11 @@ def plot_graph(symbol):
     ax.plot(data_to_plot['datetime'], data_to_plot['SMA20'], label='SMA20', linewidth=1, color='orange')
     ax.plot(data_to_plot['datetime'], data_to_plot['SMA50'], label='SMA50', linewidth=1, color='purple')
 
-    # Add the legend and title
+    # Legendes et titre
     ax.legend(loc='upper left')
     ax.set_title('BTC/USDT - Last 1000 Candles')
 
-    # Add the grid
+    # Ajout de la grille
     ax.grid(True)
 
     # Convertir le graphe Matplotlib en objet Tkinter
