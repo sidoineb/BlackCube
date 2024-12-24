@@ -67,6 +67,10 @@ def plot_graph(symbol):
     }
     
     res = requests.get(url, params=params)
+    if res.status_code != 200:
+        print(f"Error fetching data: {res.status_code}")
+        return
+
     data = pd.DataFrame(json.loads(res.text), columns=['datetime', 'open', 'high', 'low', 'close', 'volume', 
                                                        'close_time', 'quote_asset_volume', 'number_of_trades', 
                                                        'taker_buy_base_asset_volume', 'taker_buy_quote_asset_volume', 'ignore'])
@@ -100,6 +104,11 @@ def plot_graph(symbol):
     # Convertir le graphe Matplotlib en objet Tkinter
     canvas = FigureCanvasTkAgg(fig, master=window)
     canvas.draw()
+
+    # Clear previous plot if exists
+    for widget in window.winfo_children():
+        if isinstance(widget, FigureCanvasTkAgg):
+            widget.get_tk_widget().destroy()
 
     # Afficher le graphe dans la fenêtre principale
     canvas.get_tk_widget().pack(side=tk.TOP, fill=tk.BOTH, expand=1)
