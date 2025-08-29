@@ -1,0 +1,28 @@
+# BlackCube - Trading & Analysis Bot
+# Dépendances Python requises
+
+# Interface graphique et widgets
+tkinter>=8.6  # Généralement inclus avec Python
+matplotlib>=3.5.0
+pandas>=1.3.0
+numpy>=1.21.0
+
+# Requêtes HTTP pour APIs
+requests>=2.25.0
+
+# Analyse technique (optionnel - calculé manuellement dans le code)
+# ta-lib>=0.4.0  # Décommentez si vous voulez utiliser TA-Lib
+
+# Gestion des dates
+python-dateutil>=2.8.0
+
+# Export de données
+openpyxl>=3.0.0  # Pour l'export Excel
+
+# Logging et utilitaires
+typing-extensions>=4.0.0  # Pour les annotations de type
+
+# Développement et tests (optionnel)
+# pytest>=6.0.0
+# black>=22.0.0
+# flake8>=4.0.0
